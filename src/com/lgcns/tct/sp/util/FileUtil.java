@@ -91,4 +91,10 @@ public class FileUtil {
         }
     }
 
+    public static String map2json(Map<String, Object> map) throws Exception {
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(map);
+        return jsonStr;
+    }
+
 }
