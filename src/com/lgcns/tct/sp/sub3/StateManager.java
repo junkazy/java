@@ -2,23 +2,21 @@ package com.lgcns.tct.sp.sub3;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import com.lgcns.tct.sp.sub3.dto.ActionState;
 import com.lgcns.tct.sp.sub3.dto.ParallelState;
 import com.lgcns.tct.sp.sub3.dto.State;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class StateManager {
 
     private static Map<String, State> states = new ConcurrentHashMap<>();
-
-    public static List<Map<String, String>> results = new ArrayList<>();
 
     class StatesDto {
         public Map<String, StateDto> state;

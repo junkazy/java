@@ -39,22 +39,22 @@ public class AddServer {
             String requestURL = request.getRequestURL().toString();
             String path = requestURL.substring(requestURL.lastIndexOf("/") + 1);
 
-            System.out.println(">> AddServlet.doGet - requestURL : " + request.getRequestURL().toString());
-            System.out.println(">> AddServlet.doGet - requestURI : " + request.getRequestURI().toString());
-            System.out.println(">> AddServlet.doGet - requestURI : " + request.getParameterMap().toString());
-            System.out.println(">> AddServlet.doGet - path : " + path);
+            long id = Thread.currentThread().getId();
+            System.out.println("[" + id + "] >> AddServlet.doGet - requestURL : " + request.getRequestURL().toString());
+            System.out.println("[" + id + "] >> AddServlet.doGet - requestURI : " + request.getRequestURI().toString());
+            System.out.println("[" + id + "] >> AddServlet.doGet - requestURI : " + request.getParameterMap().toString());
+            System.out.println("[" + id + "] >> AddServlet.doGet - path : " + path);
 
             try {
-                for (int i = 0; i < 1; i++) {
-                    System.out.println(">> AddServlet.doGet - Thread.sleep : " + i + "sec...");
+                for (int i = 0; i < 3; i++) {
+                    System.out.println("[" + id + "] >> AddServlet.doGet - Thread.sleep : " + i + "sec...");
                     Thread.sleep(1000);
                 }
 
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                int num = (int) (Math.random() * (99 - 10 + 1)) + 10;
-                response.getWriter().write("{\"id\":\"ID_"+(num)+"\",\"total\":\""+(num)+"\"}");
+                response.getWriter().write("{\"id\":\"ID_"+(id)+"\",\"total\":\""+(id)+"\"}");
                 response.getWriter().close();
 
             } catch (Exception e) {
