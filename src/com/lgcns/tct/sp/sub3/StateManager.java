@@ -4,21 +4,21 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lgcns.tct.sp.sub3.dto.ActionState;
+import com.lgcns.tct.sp.sub3.dto.ParallelState;
 import com.lgcns.tct.sp.sub3.dto.State;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class StateManager {
 
     private static Map<String, State> states = new ConcurrentHashMap<>();
+
+    public static List<Map<String, String>> results = new ArrayList<>();
 
     class StatesDto {
         public Map<String, StateDto> state;
@@ -27,6 +27,7 @@ public class StateManager {
             public String type;
             public String url;
             public List<String> parameters;
+            public List<StatesDto> branches;
         }
     }
 
@@ -47,6 +48,15 @@ public class StateManager {
     private static State makeState(String stateName, StatesDto.StateDto stateDto) {
         if ("action".equals(stateDto.type)) {
             return new ActionState(stateName, stateDto.url, stateDto.parameters);
+
+        } else if ("parallel".equals(stateDto.type)) {
+            List<State> states = new ArrayList<>();
+            for (StatesDto branch : stateDto.branches) {
+                for (Map.Entry<String, StatesDto.StateDto> entry : branch.state.entrySet()) {
+                    states.add(makeState(entry.getKey(), entry.getValue()));
+                }
+            }
+            return new ParallelState(stateName, states);
         }
         return null;
     }

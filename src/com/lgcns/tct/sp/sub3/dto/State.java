@@ -13,5 +13,5 @@ public abstract class State {
         return name;
     }
 
-    public abstract void run() throws Exception;
+    public abstract String run() throws Exception;
 }

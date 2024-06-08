@@ -15,6 +15,10 @@ public class ValiableManager {
 
     private static Map<String, String> variables;
 
+    public synchronized static Map<String, String> get() {
+        return variables;
+    }
+
     public synchronized static String get(String key) {
         return variables.get(key);
     }

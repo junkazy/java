@@ -45,10 +45,16 @@ public class AddServer {
             System.out.println(">> AddServlet.doGet - path : " + path);
 
             try {
+                for (int i = 0; i < 1; i++) {
+                    System.out.println(">> AddServlet.doGet - Thread.sleep : " + i + "sec...");
+                    Thread.sleep(1000);
+                }
+
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                response.getWriter().write("{\"total\":\"1\"}");
+                int num = (int) (Math.random() * (99 - 10 + 1)) + 10;
+                response.getWriter().write("{\"id\":\"ID_"+(num)+"\",\"total\":\""+(num)+"\"}");
                 response.getWriter().close();
 
             } catch (Exception e) {

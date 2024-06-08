@@ -23,23 +23,27 @@ public class ActionState extends State {
     }
 
     @Override
-    public void run() throws Exception {
+    public String run() throws Exception {
         HttpClient httpClient = new HttpClient();
         httpClient.start();
 
         try {
             String query = makeQuery();
-            System.out.println(">> ActionState.run - query : " + url + query);
+            //System.out.println(">> ActionState.run - query : " + url + query);
             ContentResponse contentResponse = httpClient.newRequest(url + query).method(HttpMethod.GET).send();
             JsonObject responseJo = new Gson().fromJson(contentResponse.getContentAsString(), JsonObject.class);
-            System.out.println(">> ActionState.run - responseJo : " + responseJo.toString());
+            //System.out.println(">> ActionState.run - responseJo : " + responseJo.toString());
             for (String key : responseJo.keySet()) {
                 ValiableManager.put(key, responseJo.get(key).getAsString());
             }
 
+            return responseJo.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     private String makeQuery() throws UnsupportedEncodingException {

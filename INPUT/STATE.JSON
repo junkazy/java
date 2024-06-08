@@ -8,12 +8,47 @@
       ]
     },
     "add": {
-      "type": "action",
-      "url": "http://127.0.0.1:8012/add",
-      "parameters": [
-        "id",
-        "key",
-        "data"
+      "type": "parallel",
+      "branches": [
+        {
+          "state": {
+            "add": {
+              "type": "action",
+              "url": "http://127.0.0.1:8012/add",
+              "parameters": [
+                "id",
+                "key",
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "state": {
+            "add": {
+              "type": "action",
+              "url": "http://127.0.0.1:8012/add",
+              "parameters": [
+                "id",
+                "key",
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "state": {
+            "add": {
+              "type": "action",
+              "url": "http://127.0.0.1:8012/add",
+              "parameters": [
+                "id",
+                "key",
+                "data"
+              ]
+            }
+          }
+        }
       ]
     },
     "fetch": {
