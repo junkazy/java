@@ -1,5 +1,5 @@
-# 2024년 3차 SP 시험 (2024-06-12)
-  * 마스킹 솔루션 문제
+# 24.3
+  * 마스킹 솔루션
     1. 마스킹
        - INPUT : Scanner (MASK EMP_INFO.TXT)
        - OUTPUT : Console (L10010 K*Y 010-1*34-5*78)
@@ -25,3 +25,4 @@
     * POST Request/Respose 예제
     * File write 시 Create/Append 취사선택 예시
     * Gson : json type 변환 예시
+
